@@ -12,6 +12,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
+import com.hello.baidumap74.utils.Utils;
 
 /**
  * 抽取出来的BaseActivity,
@@ -31,7 +32,7 @@ public class BaseActivity extends Activity {
          * 注意：在百度SDK各功能组件使用之前都需要调用
          * SDKInitializer.initialize(getApplicationContext());，
          * 因此我们建议该方法放在Application的初始化方法中
-         * 新建MyApplication extends Application,
+         * 新建MyApplication extends Application
          * 重写onCreate方法，在onCreate方法中调用
          * SDKInitializer.initialize(getApplicationContext())初始化百度地图
          *
@@ -76,9 +77,7 @@ public class BaseActivity extends Activity {
      * @param text
      */
     public void showToast(CharSequence text) {
-        Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+        Utils.showToast(this, text);
     }
 
 

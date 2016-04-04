@@ -15,13 +15,14 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="YO1GX66wfYUleGrtSTLjXcN9CerCozec" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".DemoListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
     </application>
 
     <!--百度地图权限-->
