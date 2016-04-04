@@ -7,9 +7,11 @@ import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -58,11 +60,19 @@ public class MainActivity extends BaseActivity {
         Log.i(TAG, "最大：" + maxZoomLevel + " 最小：" + minZoomLevel);
 
         //3 设置地图中心点为广州塔，坐标: 经度113.330995, 维度23.112229
-        LatLng gzFoc = new LatLng(23.112229,113.330995); //维度在前，经度在后
+        LatLng gzFoc = new LatLng(23.112229, 113.330995); //维度在前，经度在后,位置颠倒地图不显示
         MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(gzFoc);//设置地图新中心点
         map.setMapStatus(update);//改变地图状态
 
+        //4 设置地图缩放级别为18级
+        update = MapStatusUpdateFactory.zoomTo(18);
+        map.setMapStatus(update);
+
+        //5 更新地图状态
+
+
     }
+    
 
     //监听百度Key配置是否正确
     private void registerSDKCheckReceiver() {
@@ -70,9 +80,9 @@ public class MainActivity extends BaseActivity {
             @Override //接收器
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
-                if (SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR.equals(action)){
+                if (SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR.equals(action)) {
                     showToast("网络错误");
-                }else if (SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR.equals(action)){
+                } else if (SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR.equals(action)) {
                     showToast("key验证失败");
                 }
 
