@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity {
 
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
+        map = mMapView.getMap();//获取地图控制器
 
         //1 隐藏缩放按钮和比例尺
 //        mMapView.showScaleControl(false);//是否显示比例尺控件
@@ -51,19 +52,15 @@ public class MainActivity extends BaseActivity {
         //检查网络和key
         registerSDKCheckReceiver();
 
-        map = mMapView.getMap();//获取地图控制器
-
         //2 获取地图最大最小缩放级别
         float maxZoomLevel = map.getMaxZoomLevel();//获取地图最大缩放级别
         float minZoomLevel = map.getMinZoomLevel();//获取地图最小缩放级别
         Log.i(TAG, "最大：" + maxZoomLevel + " 最小：" + minZoomLevel);
 
-        //3 设置地图中心点为广州塔，坐标: 113.330995,23.112229
-        final LatLng gzFoc = new LatLng(113.330995,23.112229); //维度在前，经度在后
+        //3 设置地图中心点为广州塔，坐标: 经度113.330995, 维度23.112229
+        LatLng gzFoc = new LatLng(23.112229,113.330995); //维度在前，经度在后
         MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(gzFoc);//设置地图新中心点
         map.setMapStatus(update);//改变地图状态
-
-
 
     }
 
