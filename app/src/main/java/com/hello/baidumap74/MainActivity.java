@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 
 /**
@@ -17,6 +18,7 @@ public class MainActivity extends BaseActivity {
 
     private MapView mMapView;
     private BroadcastReceiver receiver;
+    private BaiduMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,19 @@ public class MainActivity extends BaseActivity {
 
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
+
+        //1 隐藏缩放按钮和比例尺
+        mMapView.showScaleControl(false);//是否显示比例尺控件
+        mMapView.showZoomControls(false);//否显示缩放控件
+
         //检查网络和key
         registerSDKCheckReceiver();
+
+        map = mMapView.getMap();//获取地图控制器
+
+
+
+
     }
 
     //监听百度Key配置是否正确
