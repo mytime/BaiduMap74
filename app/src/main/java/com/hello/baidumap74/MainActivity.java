@@ -1,16 +1,22 @@
 package com.hello.baidumap74;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
 
 /**
  * 环境
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private MapView mMapView;
+    private BroadcastReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +34,34 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        //2 获取地图控件引用
+        //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
+        //检查网络和key
+        registerSDKCheckReceiver();
+    }
+
+    //监听百度Key配置是否正确
+    private void registerSDKCheckReceiver() {
+        receiver = new BroadcastReceiver() {
+            @Override //接收器
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR.equals(action)){
+                    showToast("网络错误");
+                }else if (SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR.equals(action)){
+                    showToast("key验证失败");
+                }
+
+            }
+        };
+        //开始一个过滤器
+        IntentFilter filter = new IntentFilter();
+        //监听网络错误
+        filter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
+        //监听百度地图SDK的key是否错误
+        filter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
+        //注册接收器
+        registerReceiver(receiver, filter);
     }
 
     @Override
@@ -37,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mMapView.onDestroy();
+        //解除广播
+        unregisterReceiver(receiver);
     }
 
     @Override
