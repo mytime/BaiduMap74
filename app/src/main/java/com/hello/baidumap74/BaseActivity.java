@@ -10,6 +10,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 
 /**
@@ -61,6 +62,10 @@ public class BaseActivity extends Activity {
         //4 设置地图缩放级别为18级
         update = MapStatusUpdateFactory.zoomTo(18);
         map.setMapStatus(update);
+
+        //6 隐藏指南针
+        UiSettings uiSettings = map.getUiSettings();
+        uiSettings.setCompassEnabled(false); //不显示指南针
 
     }
 
