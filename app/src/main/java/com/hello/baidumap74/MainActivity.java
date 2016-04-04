@@ -10,7 +10,10 @@ import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.model.LatLng;
 
 /**
  * 环境
@@ -53,7 +56,13 @@ public class MainActivity extends BaseActivity {
         //2 获取地图最大最小缩放级别
         float maxZoomLevel = map.getMaxZoomLevel();//获取地图最大缩放级别
         float minZoomLevel = map.getMinZoomLevel();//获取地图最小缩放级别
-        Log.i(TAG,"最大："+ maxZoomLevel+" 最小："+minZoomLevel);
+        Log.i(TAG, "最大：" + maxZoomLevel + " 最小：" + minZoomLevel);
+
+        //3 设置地图中心点为广州塔，坐标: 113.330995,23.112229
+        final LatLng gzFoc = new LatLng(113.330995,23.112229); //维度在前，经度在后
+        MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(gzFoc);//设置地图新中心点
+        map.setMapStatus(update);//改变地图状态
+
 
 
     }
