@@ -64,7 +64,7 @@ public abstract class BaseActivity extends Activity {
         map.setMapStatus(update);//改变地图状态
 
         //4 设置地图缩放级别为18级
-        update = MapStatusUpdateFactory.zoomTo(18);
+        update = MapStatusUpdateFactory.zoomTo(17);
         map.setMapStatus(update);
 
         //6 隐藏指南针

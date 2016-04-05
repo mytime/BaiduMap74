@@ -1,7 +1,13 @@
 package com.hello.baidumap74;
 
+import android.view.View;
+import android.widget.TextView;
+
+import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapViewLayoutParams;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
 
@@ -10,9 +16,45 @@ import com.baidu.mapapi.model.LatLng;
  */
 public class MarkerOverlayActivity extends BaseActivity{
     LatLng gzFoc = new LatLng(23.112229, 113.330995); //广州塔坐标，维度在前，经度在后
+    private TextView tv_title;
+    private View pop;
+
     @Override
     public void init() {
         initMarker();
+        //Marker点击监听器
+        map.setOnMarkerClickListener(mOnMarkerClickListener);
+    }
+
+    /**
+     * Marker点击监听器
+     */
+
+    BaiduMap.OnMarkerClickListener mOnMarkerClickListener = new BaiduMap.OnMarkerClickListener() {
+        @Override
+        public boolean onMarkerClick(Marker marker) {
+
+            //显示一个泡泡
+            if(pop ==null){
+                pop = View.inflate(MarkerOverlayActivity.this, R.layout.pop, null);    //填充的布局
+                tv_title = (TextView) pop.findViewById(R.id.tv_title);
+                mMapView.addView(pop,createLayoutParams(marker.getPosition()));
+                return true;
+            }else{
+                mMapView.updateViewLayout(pop,createLayoutParams(marker.getPosition()));
+            }
+            tv_title.setText(marker.getTitle());
+            return true;
+        }
+    };
+
+    private MapViewLayoutParams createLayoutParams(LatLng position){
+        MapViewLayoutParams.Builder builder = new MapViewLayoutParams.Builder();    //初始化一个布局构建器
+        builder.layoutMode(MapViewLayoutParams.ELayoutMode.mapMode);    //指定坐标方式为经纬度
+        builder.position(position); //设置坐标的位置
+        builder.yOffset(-65);   //向上偏移量
+        MapViewLayoutParams build = builder.build();    //执行构建
+        return build;
     }
     /** 初始化标志 */
     private void initMarker() {
