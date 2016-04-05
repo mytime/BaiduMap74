@@ -27,6 +27,7 @@ public class DemoListActivity extends ListActivity {
             new ClassAndName(TextOverlayActivity.class, "文字覆盖物"),
             new ClassAndName(MarkerOverlayActivity.class, "Marker图标覆盖物"),
             new ClassAndName(SearchInBoundActivity.class, "范围内搜索"),
+            new ClassAndName(SearchInCityActivity.class, "城市内搜索"),
 
     };
 

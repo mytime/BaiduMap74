@@ -28,6 +28,7 @@
         <activity android:name=".TextOverlayActivity"/>
         <activity android:name=".MarkerOverlayActivity"/>
         <activity android:name=".SearchInBoundActivity"/>
+        <activity android:name=".SearchInCityActivity"/>
     </application>
 
     <!--百度地图权限-->
