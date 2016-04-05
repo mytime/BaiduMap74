@@ -3,8 +3,6 @@ package com.hello.baidumap74;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatusUpdate;
@@ -17,15 +15,18 @@ import com.hello.baidumap74.utils.Utils;
 /**
  * 抽取出来的BaseActivity,
  */
-public class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity {
 
     private static final String TAG = "BaseActivity";
     protected MapView mMapView;
     protected BaiduMap map;
 
-
+    /**
+     * 这里加final是为了不让子类覆盖
+     * 预防这里有的类还没初始化就被调用，导致出现空指针异常
+     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         /**
          * 1
@@ -68,7 +69,14 @@ public class BaseActivity extends Activity {
         UiSettings uiSettings = map.getUiSettings();
         uiSettings.setCompassEnabled(false); //不显示指南针
 
+        init();
+
     }
+
+    /**
+     * 这个抽象方法让子类实现
+     */
+    public abstract void init();
 
 
     /**
@@ -80,6 +88,11 @@ public class BaseActivity extends Activity {
         Utils.showToast(this, text);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
 
     @Override
     protected void onResume() {
@@ -94,5 +107,6 @@ public class BaseActivity extends Activity {
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();
     }
+
 
 }

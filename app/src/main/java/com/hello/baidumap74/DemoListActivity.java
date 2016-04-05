@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -23,6 +22,8 @@ public class DemoListActivity extends ListActivity {
 
     ClassAndName[] datas = {
             new ClassAndName(MainActivity.class, "HelloBaiduMap"),
+            new ClassAndName(MapLayerActivity.class, "地图图层"),
+            new ClassAndName(CircelOverlayActivity.class, "圆形覆盖物"),
 
     };
 
@@ -30,6 +31,7 @@ public class DemoListActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         //检查网络和key
         registerSDKCheckReceiver();
 
@@ -99,7 +101,6 @@ public class DemoListActivity extends ListActivity {
     protected void onDestroy() {
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-        mMapView.onDestroy();
         //解除广播
         unregisterReceiver(receiver);
     }

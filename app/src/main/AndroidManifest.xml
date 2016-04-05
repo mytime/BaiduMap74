@@ -13,7 +13,7 @@
         <!--百度Key-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="YO1GX66wfYUleGrtSTLjXcN9CerCozec" />
+            android:value="koSSasFhdIrRYg2QGSXhC0WsSSzlPUSP" />
 
         <activity android:name=".DemoListActivity">
             <intent-filter>
@@ -23,6 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".MapLayerActivity"/>
+        <activity android:name=".CircelOverlayActivity"/>
     </application>
 
     <!--百度地图权限-->

@@ -13,6 +13,7 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.model.LatLng;
+import com.hello.baidumap74.utils.Utils;
 
 /**
  * 环境
@@ -20,14 +21,13 @@ import com.baidu.mapapi.model.LatLng;
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
+    private BroadcastReceiver receiver;
 
-
+    //父类的onCreate声明为final类型，所以不能重写onCreate,
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-
+    public void init() {
+        //检查网络和key
+        registerSDKCheckReceiver();
     }
     //5 更新地图状态
 
@@ -50,14 +50,14 @@ public class MainActivity extends BaseActivity {
                 break;
             case KeyEvent.KEYCODE_4://每次在原来的基础上再俯仰-5度(0~45);
                 float overlook = map.getMapStatus().overlook;
-                float v = overlook-5;
+                float v = overlook - 5;
                 mapStatus = new MapStatus.Builder().overlook(v).build();
                 update = MapStatusUpdateFactory.newMapStatus(mapStatus);
                 break;
             case KeyEvent.KEYCODE_5://移动 到 中信广场 坐标 113.330352,23.148398
-                LatLng zxFoc = new LatLng(23.148398,113.330352);
+                LatLng zxFoc = new LatLng(23.148398, 113.330352);
                 update = MapStatusUpdateFactory.newLatLng(zxFoc);
-                map.animateMapStatus(update,2000); //用动画形式移动坐标
+                map.animateMapStatus(update, 2000); //用动画形式移动坐标
                 return super.onKeyDown(keyCode, event); //不再往下执行。
         }
 
@@ -65,7 +65,29 @@ public class MainActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    //监听百度Key配置是否正确
+    private void registerSDKCheckReceiver() {
+        receiver = new BroadcastReceiver() {
+            @Override //接收器
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR.equals(action)) {
+                    Utils.showToast(MainActivity.this, "网络错误");
+                } else if (SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR.equals(action)) {
+                    Utils.showToast(MainActivity.this, "key验证失败");
+                }
 
+            }
+        };
+        //开始一个过滤器
+        IntentFilter filter = new IntentFilter();
+        //监听网络错误
+        filter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
+        //监听百度地图SDK的key是否错误
+        filter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
+        //注册接收器
+        registerReceiver(receiver, filter);
+    }
 
 
 }

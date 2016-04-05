@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.hello.baidumap74.BaseActivity;
-
 /**
  * 抽取出来你的Toast方法
  */
