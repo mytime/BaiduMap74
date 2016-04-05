@@ -20,6 +20,7 @@ public abstract class BaseActivity extends Activity {
     private static final String TAG = "BaseActivity";
     protected MapView mMapView;
     protected BaiduMap map;
+    private LatLng gzFoc;
 
     /**
      * 这里加final是为了不让子类重写onCreate，只能使用init()抽象方法来初始化，
@@ -58,7 +59,7 @@ public abstract class BaseActivity extends Activity {
         Log.i(TAG, "最大：" + maxZoomLevel + " 最小：" + minZoomLevel);
 
         //3 设置地图中心点为广州塔，坐标: 经度113.330995, 维度23.112229
-        LatLng gzFoc = new LatLng(23.112229, 113.330995); //维度在前，经度在后,位置颠倒地图不显示
+        gzFoc = new LatLng(23.112229, 113.330995);
         MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(gzFoc);//设置地图新中心点
         map.setMapStatus(update);//改变地图状态
 
