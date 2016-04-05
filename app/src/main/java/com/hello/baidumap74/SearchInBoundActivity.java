@@ -25,7 +25,7 @@ public class SearchInBoundActivity extends BaseActivityForPoiSearch {
      * 搜索参数
      */
     private PoiBoundSearchOption getSearchParams() {
-        //该POI范围内检索参数对象
+        //  该POI范围内检索参数对象
         PoiBoundSearchOption params = new PoiBoundSearchOption();
         //  搜索范围，由一个西南点和一个东北点组成的范围
         LatLngBounds bounds = new LatLngBounds.Builder().include(new LatLng(40.048459, 116.302072))

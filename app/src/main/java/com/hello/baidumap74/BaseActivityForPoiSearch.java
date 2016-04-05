@@ -24,12 +24,10 @@ public abstract class BaseActivityForPoiSearch extends BaseActivity implements O
         poiSearch.setOnGetPoiSearchResultListener(this);   //搜索结果监听器
 
         // poi 覆盖物对象
-        poiOverlay = new PoiOverlay(map){
+        poiOverlay = new PoiOverlay(map) {
             @Override
             public boolean onPoiClick(int i) {
-                PoiInfo poiInfo = getPoiResult().getAllPoi().get(i);
-                showToast(poiInfo.name+","+poiInfo.address);
-                return true;
+                return BaseActivityForPoiSearch.this.onPoiClick(i);
             }
         };
         map.setOnMarkerClickListener(poiOverlay);       //覆盖物单击监听器
@@ -37,14 +35,27 @@ public abstract class BaseActivityForPoiSearch extends BaseActivity implements O
         poiSearchInit();
     }
 
+    /**
+     *
+     * 抽取出来的覆盖物点击事件,抽出来的目的是为了让子类可以重写该方法
+     */
+    public boolean onPoiClick(int i) {
+        PoiInfo poiInfo = poiOverlay.getPoiResult().getAllPoi().get(i);
+        showToast(poiInfo.name + "," + poiInfo.address);
+        return true;
+    }
+
     //强制子类使用这个方法（已经初始化过poiSearch）,防止出现poiSearch出现控制帧异常
     protected abstract void poiSearchInit();
 
     //因为其他搜索结果处理方法相同，所以抽取成父类
-    /** 获取兴趣点, poi 查询结果回调*/
+
+    /**
+     * 获取兴趣点, poi 查询结果回调
+     */
     @Override
     public void onGetPoiResult(PoiResult poiResult) {
-        if (poiResult == null || poiResult.error != SearchResult.ERRORNO.NO_ERROR){
+        if (poiResult == null || poiResult.error != SearchResult.ERRORNO.NO_ERROR) {
             showToast("没有搜索到结果");
             return;
         }

@@ -13,7 +13,8 @@
         <!--百度Key-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="koSSasFhdIrRYg2QGSXhC0WsSSzlPUSP" />
+            android:value="YO1GX66wfYUleGrtSTLjXcN9CerCozec" />
+            <!--android:value="koSSasFhdIrRYg2QGSXhC0WsSSzlPUSP" />-->
 
         <activity android:name=".DemoListActivity">
             <intent-filter>
