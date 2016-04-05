@@ -26,6 +26,7 @@ public class DemoListActivity extends ListActivity {
             new ClassAndName(CircelOverlayActivity.class, "圆形覆盖物"),
             new ClassAndName(TextOverlayActivity.class, "文字覆盖物"),
             new ClassAndName(MarkerOverlayActivity.class, "Marker图标覆盖物"),
+            new ClassAndName(SearchInBoundActivity.class, "范围内搜索"),
 
     };
 

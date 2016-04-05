@@ -27,6 +27,7 @@
         <activity android:name=".CircelOverlayActivity"/>
         <activity android:name=".TextOverlayActivity"/>
         <activity android:name=".MarkerOverlayActivity"/>
+        <activity android:name=".SearchInBoundActivity"/>
     </application>
 
     <!--百度地图权限-->
