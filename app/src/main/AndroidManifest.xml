@@ -25,6 +25,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".MapLayerActivity"/>
         <activity android:name=".CircelOverlayActivity"/>
+        <activity android:name=".TextOverlayActivity"/>
     </application>
 
     <!--百度地图权限-->

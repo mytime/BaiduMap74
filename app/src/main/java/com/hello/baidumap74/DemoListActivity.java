@@ -14,7 +14,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.hello.baidumap74.utils.Utils;
 
 /**
- * Created by iwan on 16/4/4.
+ * 导航列表
  */
 public class DemoListActivity extends ListActivity {
 
@@ -24,6 +24,7 @@ public class DemoListActivity extends ListActivity {
             new ClassAndName(MainActivity.class, "HelloBaiduMap"),
             new ClassAndName(MapLayerActivity.class, "地图图层"),
             new ClassAndName(CircelOverlayActivity.class, "圆形覆盖物"),
+            new ClassAndName(TextOverlayActivity.class, "文字覆盖物"),
 
     };
 

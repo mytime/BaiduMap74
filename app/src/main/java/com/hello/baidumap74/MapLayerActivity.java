@@ -3,7 +3,7 @@ package com.hello.baidumap74;
 import android.view.KeyEvent;
 
 /**
- * Created by iwan on 16/4/4.
+ * 地图图层
  */
 public class MapLayerActivity extends BaseActivity {
     @Override

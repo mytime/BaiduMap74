@@ -5,7 +5,7 @@ import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.model.LatLng;
 
 /**
- * Created by iwan on 16/4/4.
+ * 圆形覆盖物.
  */
 public class CircelOverlayActivity extends BaseActivity{
 

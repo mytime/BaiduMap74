@@ -16,7 +16,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.hello.baidumap74.utils.Utils;
 
 /**
- * 环境
+ * HelloBaiduMap
  */
 public class MainActivity extends BaseActivity {
 
