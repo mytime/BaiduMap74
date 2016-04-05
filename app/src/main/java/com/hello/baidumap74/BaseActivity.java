@@ -22,8 +22,9 @@ public abstract class BaseActivity extends Activity {
     protected BaiduMap map;
 
     /**
-     * 这里加final是为了不让子类覆盖
+     * 这里加final是为了不让子类重写onCreate，只能使用init()抽象方法来初始化，
      * 预防这里有的类还没初始化就被调用，导致出现空指针异常
+     * 使用public abstract void init()来规范引用onCreate
      */
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public abstract class BaseActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        //获取地图控件引用
+        //初始化：获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
         map = mMapView.getMap();//获取地图控制器
 

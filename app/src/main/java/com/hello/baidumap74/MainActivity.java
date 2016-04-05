@@ -89,5 +89,9 @@ public class MainActivity extends BaseActivity {
         registerReceiver(receiver, filter);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
 }
