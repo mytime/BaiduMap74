@@ -31,6 +31,7 @@
         <activity android:name=".SearchInBoundActivity"/>
         <activity android:name=".SearchInCityActivity"/>
         <activity android:name=".SearchInNearbyActivity"/>
+        <activity android:name=".DrivingSearchActivity"/>
     </application>
 
     <!--百度地图权限-->
