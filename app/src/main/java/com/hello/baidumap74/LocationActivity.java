@@ -8,6 +8,10 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.BDNotifyListener;//假如用到位置提醒功能，需要import该类
 import com.baidu.location.Poi;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
 
 import java.util.List;
 
@@ -23,6 +27,16 @@ public class LocationActivity extends BaseActivity {
         //在这个方法里面接受定位结果
         @Override
         public void onReceiveLocation(BDLocation location) {
+            if (location != null){
+                MyLocationData.Builder builder = new MyLocationData.Builder();//位置生成器对象
+                builder.accuracy(location.getRadius());         //设置精度
+                builder.direction(location.getDirection());     //设置方向
+                builder.latitude(location.getLatitude());       //设置维度
+                builder.longitude(location.getLongitude());     //设置经度
+                MyLocationData locationData = builder.build();  //生成
+                map.setMyLocationData(locationData);            //把定位数据显示到地图上
+            }
+
             //Receive Location
             StringBuffer sb = new StringBuffer(256);
             sb.append("time : ");
@@ -89,8 +103,21 @@ public class LocationActivity extends BaseActivity {
     public void init() {
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
+
         initLocation();             //设置定位参数
+
+        map.setMyLocationEnabled(true); //开启定位图层
+        setMyLocationConfigeration(MyLocationConfiguration.LocationMode.COMPASS); //罗盘模式
+
         mLocationClient.start(); //开始定位
+    }
+    /** 定位图层配置 */
+    private void setMyLocationConfigeration(MyLocationConfiguration.LocationMode mode) {
+        boolean enableDirection = true; //允许显示方向
+        BitmapDescriptor customMarker = BitmapDescriptorFactory.fromResource(R.drawable.icon_geo);     //自定义图标
+        MyLocationConfiguration config = new MyLocationConfiguration(mode,enableDirection,customMarker);
+        map.setMyLocationConfigeration(config);//定位配置
+//        map.setMyLocationData(locationData); //定位要显示的数据，在定位监听器获取并执行该方法
     }
 
     private void initLocation() {
