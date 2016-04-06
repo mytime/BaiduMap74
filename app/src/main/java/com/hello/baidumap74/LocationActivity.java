@@ -1,12 +1,12 @@
 package com.hello.baidumap74;
 
 import android.util.Log;
+import android.view.KeyEvent;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.location.BDNotifyListener;//假如用到位置提醒功能，需要import该类
 import com.baidu.location.Poi;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -103,14 +103,29 @@ public class LocationActivity extends BaseActivity {
     public void init() {
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
-
         initLocation();             //设置定位参数
-
         map.setMyLocationEnabled(true); //开启定位图层
         setMyLocationConfigeration(MyLocationConfiguration.LocationMode.COMPASS); //罗盘模式
-
         mLocationClient.start(); //开始定位
     }
+
+    /** 定位模式切换*/
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_1: //罗盘态，显示定位方向圈，保持定位图标在地图中心
+                setMyLocationConfigeration(MyLocationConfiguration.LocationMode.COMPASS);
+                break;
+            case KeyEvent.KEYCODE_2: //跟随态，保持定位图标在地图中心
+                setMyLocationConfigeration(MyLocationConfiguration.LocationMode.FOLLOWING);
+                break;
+            case KeyEvent.KEYCODE_3: //普通态： 更新定位数据时不对地图做任何操作
+                setMyLocationConfigeration(MyLocationConfiguration.LocationMode.NORMAL);
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     /** 定位图层配置 */
     private void setMyLocationConfigeration(MyLocationConfiguration.LocationMode mode) {
         boolean enableDirection = true; //允许显示方向
