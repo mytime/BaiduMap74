@@ -30,6 +30,8 @@ public class DemoListActivity extends ListActivity {
             new ClassAndName(SearchInCityActivity.class, "城市内搜索"),
             new ClassAndName(SearchInNearbyActivity.class, "周边搜索"),
             new ClassAndName(DrivingSearchActivity.class, "驾驶路线搜索"),
+            new ClassAndName(TransitSearchActivity.class, "换乘路线搜索"),
+            new ClassAndName(WalkingSearchActivity.class, "步行路线搜索"),
 
     };
 

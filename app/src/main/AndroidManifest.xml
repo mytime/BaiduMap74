@@ -13,8 +13,8 @@
         <!--百度Key-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="YO1GX66wfYUleGrtSTLjXcN9CerCozec" />
-            <!--android:value="koSSasFhdIrRYg2QGSXhC0WsSSzlPUSP" />-->
+            android:value="koSSasFhdIrRYg2QGSXhC0WsSSzlPUSP" />
+            <!--android:value="YO1GX66wfYUleGrtSTLjXcN9CerCozec" />-->
 
         <activity android:name=".DemoListActivity">
             <intent-filter>
@@ -32,6 +32,8 @@
         <activity android:name=".SearchInCityActivity"/>
         <activity android:name=".SearchInNearbyActivity"/>
         <activity android:name=".DrivingSearchActivity"/>
+        <activity android:name=".TransitSearchActivity"/>
+        <activity android:name=".WalkingSearchActivity"/>
     </application>
 
     <!--百度地图权限-->
